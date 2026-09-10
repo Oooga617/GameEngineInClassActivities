@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         moveX = Input.GetAxis("Horizontal");
-        if (!isGrounded && Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("supposed to jump");
             isGrounded = false;
