@@ -511,6 +511,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   speed: 400
+  jumpForce: 100
 --- !u!50 &1389122879
 Rigidbody2D:
   serializedVersion: 5
