@@ -2,7 +2,7 @@
 
 I'm John Philip Underwood, and Im trying to do like Technical Art in the form of 3D modeling and maybe some shader and VFX work on the side. 
 
-#In class activity 1:
+# In class activity 1:
 
 I was only able to get as far as to create the ground, and a player controller script with moving left and right. You can jump but there is nothing checking the ground.
 
