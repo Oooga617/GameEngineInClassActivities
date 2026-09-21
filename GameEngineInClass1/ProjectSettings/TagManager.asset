@@ -9,6 +9,8 @@ TagManager:
   - PickUp
   - FlagPole
   - Shell
+  - Projectile
+  - gm
   layers:
   - Default
   - TransparentFX

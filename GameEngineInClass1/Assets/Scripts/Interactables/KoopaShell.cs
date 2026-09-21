@@ -7,11 +7,15 @@ public class KoopaShell : MonoBehaviour
     public float shellSpeed = 6.0f;
     Rigidbody2D rb;
     Vector3 moveDir = new Vector3(1, 0, 0);
+    GameManager gameManager;
+    PlayerController player;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        gameManager = GameObject.FindWithTag("gm").GetComponent<GameManager>();
     }
 
     //set the direction of the shell
@@ -43,7 +47,9 @@ public class KoopaShell : MonoBehaviour
             if (!collision.gameObject.CompareTag("Player"))
                 Destroy(collision.gameObject);
             else
-                collision.gameObject.SetActive(false);
+                player.playerDeath();
+
+
         }
         
         if (!collision.gameObject.CompareTag("Player") || !collision.gameObject.CompareTag("ground") || !collision.gameObject.CompareTag("PickUp"))

@@ -12,6 +12,11 @@ public class flagSlide : MonoBehaviour
     float flagSlideElapsed = 0.0f;
     float flagSlideRatio;
     public float flagSpeed = 15.0f;
+
+    public GameManager gameManager;
+
+    //win condition
+    public bool isWin = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -35,6 +40,8 @@ public class flagSlide : MonoBehaviour
             else
             {
                 flagSlideRatio = 1.0f;
+                isWin = true;
+                gameManager.displayText();
             }
 
             flag.transform.position = Vector3.Lerp(oldPos, newPos, flagSlideRatio);
@@ -46,6 +53,10 @@ public class flagSlide : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
+        {
             isFlagReached = true;
+           
+        }
+            
     }
 }

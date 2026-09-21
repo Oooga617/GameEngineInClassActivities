@@ -65,7 +65,7 @@ public class Enemy : MonoBehaviour
         
 
 
-        //if a kicked koopa shell collides destroy the enemy
+        
         
 
     }

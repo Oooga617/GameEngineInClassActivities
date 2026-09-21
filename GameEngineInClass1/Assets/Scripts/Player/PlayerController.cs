@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     public float speed = 10.0f;
     public float jumpForce = 500.0f;
     bool isGrounded = true;
+    public bool isDead = false;
+    public float firePower = 500f;
 
     Vector2 moveDir;
     private InputAction move, jump, fire;
@@ -22,11 +24,17 @@ public class PlayerController : MonoBehaviour
 
     //allow you to shoot fire balls if you pick them up
     bool hasPickedUpFireFlower = false;
-    //determines where to shoot out fireballs
-    bool isFacingLeft = false;
+    
     //color determines if you pick up power up
     Color white = Color.white; //this the regular player color, so one hit you are dead
     Color orange = Color.orange; //you have fire flower, if hit then you revert to white
+
+    //fireball
+    public GameObject fireball;
+    public Transform leftShoot, rightShoot;
+    //determines where to shoot out fireballs
+    bool isFacingLeft = false;
+    public GameManager gameManager;
 
     private void Awake()
     {
@@ -44,6 +52,7 @@ public class PlayerController : MonoBehaviour
         jump = playerInputControls.Player.Jump;
         jump.Enable();
         jump.performed += Jump;
+        fire.performed += shootFireBall;
         
         
     }
@@ -60,6 +69,7 @@ public class PlayerController : MonoBehaviour
     {
         //gets access to rigidbody2D
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -69,6 +79,10 @@ public class PlayerController : MonoBehaviour
         //from the input
         
         moveDir = move.ReadValue<Vector2>();
+        if (moveDir.x < 0)
+            isFacingLeft = true;
+        else
+            isFacingLeft = false;
 
     }
 
@@ -96,7 +110,8 @@ public class PlayerController : MonoBehaviour
         //if player touch koopa shell kill the player
         else if (collision.gameObject.CompareTag("Shell"))
         {
-            this.gameObject.SetActive(false);
+            playerDeath();
+            
         }
         //calculate the distance between the colliding object and this game object
         float distance = Vector3.Distance(collision.transform.position, this.transform.position);
@@ -112,7 +127,7 @@ public class PlayerController : MonoBehaviour
         {
             if (!hasPickedUpFireFlower)
             {
-                this.gameObject.SetActive(false);
+                playerDeath();
             }
             else
             {
@@ -138,6 +153,13 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(jumpF);
     }
 
+    public void playerDeath()
+    {
+        isDead = true;
+        gameManager.displayText();
+        this.gameObject.SetActive(false);
+    }
+
     //gives the player the powerup depending on the id of the pick up
     public void givePowerUp(string id)
     {
@@ -148,8 +170,26 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void shootFireBall()
+    //shoots fireball
+    void shootFireBall(InputAction.CallbackContext context)
     {
-
+        Debug.Log("is supposed to shoot");
+        Vector2 shootDir = new Vector2(1, 0);
+        if (isFacingLeft)
+        {
+            GameObject projectile = Instantiate(fireball, leftShoot);
+            Debug.Log("is facing right");
+            Debug.Log(projectile + ": " + projectile.transform.position);
+            projectile.GetComponent<Rigidbody2D>().AddForce(shootDir * -firePower);
+            Debug.Log(projectile.GetComponent<Rigidbody2D>().linearVelocity);
+        }
+        else
+        {
+            GameObject projectile = Instantiate(fireball, rightShoot);
+            Debug.Log("is facing right");
+            Debug.Log(projectile + ": " + projectile.transform.position);
+            projectile.GetComponent<Rigidbody2D>().AddForce(shootDir * firePower);
+            Debug.Log(projectile.GetComponent<Rigidbody2D>().linearVelocity);
+        }
     }
 }
