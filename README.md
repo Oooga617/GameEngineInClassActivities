@@ -35,7 +35,7 @@ So, I was able to modify the first in class activity project to try and replicat
 
 <img width="857" height="472" alt="image" src="https://github.com/user-attachments/assets/b6ed0350-8033-4765-ac9a-cf8479851168" />
 
-Relection:
+Reflection:
 
 It was pretty challenging for me, only because I haven't touched C# in Unity for so long. The Koopa class I struggled with the most because of the shell functionality for when you stomp on it, and trying to get it to be kicked around without causing issues was messy. 
 
