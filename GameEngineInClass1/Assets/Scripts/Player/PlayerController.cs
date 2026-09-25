@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.InputSystem;
+using Chapter.Singleton;
 
 public class PlayerController : MonoBehaviour
 {
@@ -34,7 +35,6 @@ public class PlayerController : MonoBehaviour
     public Transform leftShoot, rightShoot;
     //determines where to shoot out fireballs
     bool isFacingLeft = false;
-    public GameManager gameManager;
 
     private void Awake()
     {
@@ -153,11 +153,10 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(jumpF);
     }
 
-    public void playerDeath()
+    private void playerDeath()
     {
-        isDead = true;
-        gameManager.displayText();
-        this.gameObject.SetActive(false);
+        //call on singleton Game Manager
+        GManager.Instance.gameOver();
     }
 
     //gives the player the powerup depending on the id of the pick up
@@ -173,23 +172,27 @@ public class PlayerController : MonoBehaviour
     //shoots fireball
     void shootFireBall(InputAction.CallbackContext context)
     {
-        Debug.Log("is supposed to shoot");
-        Vector2 shootDir = new Vector2(1, 0);
-        if (isFacingLeft)
+        if (hasPickedUpFireFlower)
         {
-            GameObject projectile = Instantiate(fireball, leftShoot);
-            Debug.Log("is facing right");
-            Debug.Log(projectile + ": " + projectile.transform.position);
-            projectile.GetComponent<Rigidbody2D>().AddForce(shootDir * -firePower);
-            Debug.Log(projectile.GetComponent<Rigidbody2D>().linearVelocity);
-        }
-        else
-        {
-            GameObject projectile = Instantiate(fireball, rightShoot);
-            Debug.Log("is facing right");
-            Debug.Log(projectile + ": " + projectile.transform.position);
-            projectile.GetComponent<Rigidbody2D>().AddForce(shootDir * firePower);
-            Debug.Log(projectile.GetComponent<Rigidbody2D>().linearVelocity);
+            Debug.Log("is supposed to shoot");
+            Vector2 shootDir = new Vector2(1, 0);
+            if (isFacingLeft)
+            {
+                GameObject projectile = Instantiate(fireball, leftShoot);
+                Debug.Log("is facing right");
+                Debug.Log(projectile + ": " + projectile.transform.position);
+                projectile.GetComponent<Rigidbody2D>().AddForce(shootDir * -firePower);
+                Debug.Log(projectile.GetComponent<Rigidbody2D>().linearVelocity);
+            }
+            else
+            {
+                GameObject projectile = Instantiate(fireball, rightShoot);
+                Debug.Log("is facing right");
+                Debug.Log(projectile + ": " + projectile.transform.position);
+                projectile.GetComponent<Rigidbody2D>().AddForce(shootDir * firePower);
+                Debug.Log(projectile.GetComponent<Rigidbody2D>().linearVelocity);
+            }
         }
     }
+        
 }

@@ -1,3 +1,4 @@
+using Chapter.Singleton;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -13,7 +14,6 @@ public class flagSlide : MonoBehaviour
     float flagSlideRatio;
     public float flagSpeed = 15.0f;
 
-    public GameManager gameManager;
 
     //win condition
     public bool isWin = false;
@@ -41,7 +41,7 @@ public class flagSlide : MonoBehaviour
             {
                 flagSlideRatio = 1.0f;
                 isWin = true;
-                gameManager.displayText();
+                GManager.Instance.winGame();
             }
 
             flag.transform.position = Vector3.Lerp(oldPos, newPos, flagSlideRatio);
