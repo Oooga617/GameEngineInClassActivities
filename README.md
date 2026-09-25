@@ -42,3 +42,8 @@ It was pretty challenging for me, only because I haven't touched C# in Unity for
 OOP Usage:
 
 For the principles used in this project, I have used inheritance and polymorphism in making base classes and derived classes with inherited features for the different blocks and enemies. I have also used encapsulation to make it where certain properties like the direction to move be private, and other public properties like move speed to be freely modified on inspector and by other scripts. 
+
+
+# In class activity 3:
+
+Modify game manager script to be singleton, and used factory pattern for spawning in enemies. 
