@@ -7,15 +7,13 @@ public class GameManager : Singleton<GameManager>
 
     int keysCollected = 0;
     public int keyCount = 1;
-    public GameObject gate;
-
-    public string SceneToLoad;
+    GameObject gate;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -27,6 +25,8 @@ public class GameManager : Singleton<GameManager>
     //collecting keys and unlocking gates
     public void collectKey()
     {
+        if (gate == null)
+            gate = GameObject.FindWithTag("Gate");
         keysCollected++;
         if (keysCollected >= keyCount)
         {
@@ -39,7 +39,7 @@ public class GameManager : Singleton<GameManager>
     public void nextLevel()
     {
         Debug.Log("supposed to go to next level");
-        SceneManager.LoadScene(SceneToLoad);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         
     }
 

@@ -2,12 +2,10 @@ using UnityEngine;
 
 public class PickUp : MonoBehaviour
 {
-    GameManager gm;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //finds the game manager
-        gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
+
     }
 
     // Update is called once per frame
