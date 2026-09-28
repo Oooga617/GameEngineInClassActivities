@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
     public float jumpForce;
     bool hasJumped = false;
     Vector2 moveDir;
-    public GameManager gm;
     
 
     //input actions:
@@ -19,9 +18,7 @@ public class PlayerController : MonoBehaviour
     //physics
     Rigidbody2D rb;
 
-    public bool isDead = false;
-
-    private InputAction move, jump, fire;
+    private InputAction move, jump;
 
     void Awake()
     {
@@ -33,8 +30,6 @@ public class PlayerController : MonoBehaviour
         //initializes the inputs from the input system
         move = action.Player.Move;
         move.Enable();
-        fire = action.Player.Fire;
-        fire.Enable();
         jump = action.Player.Jump;
         jump.Enable();
     }
@@ -44,7 +39,6 @@ public class PlayerController : MonoBehaviour
         //disables the inputs
         move.Disable();
         jump.Disable();
-        fire.Disable();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
