@@ -59,6 +59,12 @@ public class PlayerController : MonoBehaviour
     {
         //gets the 2D move direction
         moveDir = move.ReadValue<Vector2>();
+
+        //press q to quit
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            GameManager.Instance.quitGame();
+        }
         
     }
 
