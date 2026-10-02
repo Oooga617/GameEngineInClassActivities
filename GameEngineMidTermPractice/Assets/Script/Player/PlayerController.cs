@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour
             Debug.Log("supposed to jump");
             hasJumped = true;
             rb.AddForce(Vector2.up * jumpForce);
-            hasJumped = false;
         }
     }
 
@@ -44,6 +43,14 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("ground") && hasJumped == true)
         {
             hasJumped = false;
+        }
+    }
+
+    private void OnTriggerEnter2D (Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("portal"))
+        {
+            GameManager.Instance.LoadScene();
         }
     }
 }
