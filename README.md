@@ -47,3 +47,9 @@ For the principles used in this project, I have used inheritance and polymorphis
 # In class activity 3:
 
 Modify game manager script to be singleton, and used factory pattern for spawning in enemies. 
+
+# In class activity 5:
+
+DLL file was created as a test. 
+
+Explanation: The DLL file was created from first creating the console project to use C++, and then creating header files (.h) for the GameObject, Vector2D, and Wrappers needed to contain the data. Then it was programmed to be used in Unity and exported as a DLL file and placed in Unity. Where a C# script was used as another wrapper and utilized for a test object that prints the ID number (10) in the console.  
