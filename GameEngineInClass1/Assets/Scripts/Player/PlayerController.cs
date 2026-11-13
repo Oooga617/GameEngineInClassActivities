@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
     public Transform leftShoot, rightShoot;
     //determines where to shoot out fireballs
     bool isFacingLeft = false;
+    // script ProjectilePool reference
+    ProjectilePool projectilePool;
 
     private void Awake()
     {
@@ -70,6 +72,7 @@ public class PlayerController : MonoBehaviour
         //gets access to rigidbody2D
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        projectilePool = GetComponent<ProjectilePool>();
     }
 
     // Update is called once per frame
@@ -175,22 +178,29 @@ public class PlayerController : MonoBehaviour
         if (hasPickedUpFireFlower)
         {
             Debug.Log("is supposed to shoot");
+            
             Vector2 shootDir = new Vector2(1, 0);
             if (isFacingLeft)
             {
+                shootDir = new Vector2(-1, 0);
+                /*
                 GameObject projectile = Instantiate(fireball, leftShoot);
                 Debug.Log("is facing right");
                 Debug.Log(projectile + ": " + projectile.transform.position);
                 projectile.GetComponent<Rigidbody2D>().AddForce(shootDir * -firePower);
-                Debug.Log(projectile.GetComponent<Rigidbody2D>().linearVelocity);
+                Debug.Log(projectile.GetComponent<Rigidbody2D>().linearVelocity);*/
+                projectilePool.Spawn(leftShoot, shootDir);
             }
             else
             {
+                shootDir = new Vector2(1, 0);
+                /*
                 GameObject projectile = Instantiate(fireball, rightShoot);
                 Debug.Log("is facing right");
                 Debug.Log(projectile + ": " + projectile.transform.position);
                 projectile.GetComponent<Rigidbody2D>().AddForce(shootDir * firePower);
-                Debug.Log(projectile.GetComponent<Rigidbody2D>().linearVelocity);
+                Debug.Log(projectile.GetComponent<Rigidbody2D>().linearVelocity);*/
+                projectilePool.Spawn(rightShoot, shootDir);
             }
         }
     }
