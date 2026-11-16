@@ -46,7 +46,8 @@ public class Projectile : MonoBehaviour
  
         if (collision.gameObject.GetComponent<Enemy>())
         {
-            collision.gameObject.SetActive(false);
+            //collision.gameObject.SetActive(false);
+            collision.gameObject.GetComponent<Enemy>().getJumpedOn();
         }
         ReturnToPool();
     }

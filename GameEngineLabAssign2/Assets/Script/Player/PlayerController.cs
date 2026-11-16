@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     //movement variables
     public float moveSpeed;
     public float jumpForce;
-    bool hasJumped = false;
+    [SerializeField] bool hasJumped = false;
     Vector2 moveDir;
     
 
@@ -59,7 +59,14 @@ public class PlayerController : MonoBehaviour
         {
             GameManager.Instance.quitGame();
         }
-        
+        //press a button to jump, I couldnt figure out how to get the new input system working for subscribing and doing the jump method so im using the old input system
+        //to save time
+        if (Input.GetKeyDown(KeyCode.Space) && !hasJumped)
+        {
+            rb.AddForce(Vector2.up * jumpForce);
+            hasJumped = true;
+        }
+
     }
 
     //using forces to push player
@@ -70,13 +77,7 @@ public class PlayerController : MonoBehaviour
         {
             movePlayer(moveDir);
         }
-        //press a button to jump, I couldnt figure out how to get the new input system working for subscribing and doing the jump method so im using the old input system
-        //to save time
-        if (Input.GetKeyDown(KeyCode.Space) && !hasJumped)
-        {
-            rb.AddForce(Vector2.up * jumpForce);
-            hasJumped = true;
-        }
+        
     }
 
     //uses forces to push the player around, used in fixed update 

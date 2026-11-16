@@ -11,11 +11,19 @@ public class Koopa : Enemy
     override public void getJumpedOn()
     {
         //if jumped on, turn into koopa shell
-        if (!isHit)
+        if (health >0)
         {
-            isHit = true;
-            StartCoroutine(allowingBeKicked());
+            health--;
         }
+        else
+        {
+            if (!isHit)
+            {
+                isHit = true;
+                StartCoroutine(allowingBeKicked());
+            }
+        }
+        
     }
 
     IEnumerator allowingBeKicked()

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class Enemy : MonoBehaviour
 {
@@ -7,10 +8,17 @@ public class Enemy : MonoBehaviour
     public bool isLeft = false;
     public float moveSpeed = 2.0f;
     public bool isHit = false;
+    public int health = 1;
+    [SerializeField] GameObject healthBar;
+    HealthBar healthScript;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        //spawns in health bar
+        GameObject hpDisplay = Instantiate(healthBar, this.transform.position, Quaternion.identity, this.transform);
+        //gets reference to HealthBar script
+        healthScript = hpDisplay.GetComponent<HealthBar>();
     }
 
     void FixedUpdate()
@@ -20,7 +28,7 @@ public class Enemy : MonoBehaviour
 
     virtual public void moveEnemy()
     {
-        Debug.Log("supposed to move");
+       
         Vector3 moveDir = new Vector3(1, 0, 0);
         if (isLeft && !isHit)
         {
@@ -43,7 +51,6 @@ public class Enemy : MonoBehaviour
         float distance;
         //if colliding with anything that isnt player or the ground switch direction
         if (!collision.gameObject.CompareTag("Player") || !collision.gameObject.CompareTag("ground") || !collision.gameObject.CompareTag("PickUp"))
-        Debug.Log("supposed to switch");
         isLeft = !isLeft;
 
         if (collision.gameObject.CompareTag("Player"))

@@ -109,6 +109,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Goomba
   isLeft: 1
   moveSpeed: 3
+  isHit: 0
+  health: 1
+  healthBar: {fileID: 4300029084624173969, guid: c58adf86844f0454da8c1d38724afe39, type: 3}
 --- !u!61 &4140887910492641165
 BoxCollider2D:
   m_ObjectHideFlags: 0

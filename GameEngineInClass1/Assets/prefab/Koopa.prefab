@@ -229,4 +229,6 @@ MonoBehaviour:
   isLeft: 0
   moveSpeed: 3
   isHit: 0
+  health: 1
+  healthBar: {fileID: 4300029084624173969, guid: c58adf86844f0454da8c1d38724afe39, type: 3}
   shell: {fileID: 8970554605600828462, guid: e2070878a1928344aa2d8f93134a4814, type: 3}
