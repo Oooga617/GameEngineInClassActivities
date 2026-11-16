@@ -9,6 +9,7 @@ public class Goomba : Enemy
         {
             Debug.Log("supposed to get hurt");
             health--;
+           
         }
         else {
             Debug.Log("supposed to die");

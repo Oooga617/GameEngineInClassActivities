@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class Enemy : MonoBehaviour
 {
@@ -12,14 +13,21 @@ public class Enemy : MonoBehaviour
     [SerializeField] GameObject healthBar;
     HealthBar healthScript;
 
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         //spawns in health bar
         GameObject hpDisplay = Instantiate(healthBar, this.transform.position, Quaternion.identity, this.transform);
         //gets reference to HealthBar script
         healthScript = hpDisplay.GetComponent<HealthBar>();
+        
     }
+
+    
+
+    
+
+
 
     void FixedUpdate()
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HealthBar : MonoBehaviour
+public class HealthBar : Subject
 {
     int healthCurr, healthMax;
     [SerializeField] Enemy enemyScript;
@@ -19,9 +19,21 @@ public class HealthBar : MonoBehaviour
 
     }
 
-    public void updateHealth()
+    public override void Notify (Subject subject)
     {
-        healthCurr = enemyScript.health;
+        if (!enemyScript)
+        {
+            enemyScript = GetComponentInParent<Enemy>();
+        }
+        if (enemyScript)
+        {
+            updateHealth(enemyScript.health);
+        }
+    }
+
+    public void updateHealth(int h)
+    {
+        healthCurr = h;
         healthCurr = Mathf.Clamp(healthCurr, 0, healthMax);
         float hpRatio = (float)healthCurr / healthMax;
         Vector3 newXScale = bar.transform.localScale;
@@ -33,6 +45,6 @@ public class HealthBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        updateHealth();
+ 
     }
 }
