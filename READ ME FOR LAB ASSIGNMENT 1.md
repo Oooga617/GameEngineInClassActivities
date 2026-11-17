@@ -5,19 +5,42 @@
 Student #: 100982375
 
 
-# Lab Assignment 1
+# Lab Assignment 2
 
-The game I have made is called "Reach Your House", its a simple game of 3 levels where you have to find a key, jump on enemies, and unlock the gate blocking your way to your home. The observer pattern used in this assignment is the Singleton design pattern with the GameManager script:
+Project Title: GameEngineInClass1. 
 
-<img width="632" height="490" alt="image" src="https://github.com/user-attachments/assets/c2bf3c9b-59a8-4930-9bc5-75fd53eb0176" />
+Game loop: This is the very first in class activity being modified to where it is a loose recreation of Mario, but now the enemies have health bars. This was initially done with having the Enemy script instantiate the enemy with the health bar as a prefab when spawned in.  
 
+(I HAVE USED AI TO TRY AND HELP FIGURE OUT HOW TO IMPLEMENT OBSERVER).  
 
-How it works is that, a base singleton class is created so that it can be inherited by the GameManager script. The singleton class is set up so that only one instance of it exists at a time as a static instance, and so any other existing instance of the game manager gets deleted. Now the GameManager is static and a singleton, it can be easily accessed by different parts of the game, mainly the PickUp and PlayerController scripts. 
+This will do a before implementing Observer patterns, and after implementations.  
 
-# What element of your game adopts the chosen pattern:
+Before:  
+<img width="1018" height="568" alt="image" src="https://github.com/user-attachments/assets/354b544b-0c4f-486f-a8d2-d6f97cd055b2" />
 
-The element of the game that adopts the Singleton pattern is the GameManager script, as it allows the player to move on to different levels by scene switching when the player unlocks the gate and moves onto the next level. The PickUp script works by having it sense the player object collide with it's trigger, causing it to call on the collectKey() method from the GameManager instance and disappear. This makes the game manager object (with reference to the gate game object in the level) make the gate deactive, and thus allowing the player to collide with the house. When the player touches the house, it also calls on the GameManager instance with the nextLevel method that switches to the next scene. However, if the player gets killed by an enemy, it immediately calls on the game manager to retry the level automatically. Finally, the player can also press q to call on the quitGame() method in the GameManager to quickly exit the game. 
+ 
 
-# Why is this pattern a good choice for the associated functionality:
+There seems to be spikes in CPU and GPU usage after I implemented the modification of the enemy health bar system. Though at least a few spikes can be from the result of garbage collection systems in Unity.  
 
-The Singleton pattern choice is excellent for the GameManager script as in games you only really need one manager of a specific type to handle things, and in this case a game manager to check and update the conditions for winning and losing. Making the game manager static means that it can be accessed by script without having to directly reference it in code. Also, the game manager object itself persists between scenes, so it is further unnecessary to have multiple game managers given the nature of the Singleton implementation. Also, if you have multiple of these managers there can be unwanted behavior that can cause problems in the game. 
+After:  
+<img width="1276" height="796" alt="image" src="https://github.com/user-attachments/assets/0acc96b8-7f7c-4aa0-ba1b-f3090e237c9a" />
+
+There appear to be very minor improvements, as the entire project uses simple shapes and sprites for it. The player loop and update scene is noticeably reduced by 0.01 millisecond. The observer pattern was implemented by having the HealthScript be inheriting from subject, so it can be notified that the health bar is being updated, and change the bar accordingly.  
+
+ 
+
+What did you notice was impacting the performance of your project? 
+
+The majority of the project is very simple, there is no complex graphics or that many objects spawned. At most the profiler shows spikes coming from the CPU, GPU or garbage collection systems.  
+
+ 
+
+Which pattern(s) did you implement, and what behavior did they replace? 
+
+I implemented the Observer pattern, and I ended up modifying my project to make it where the enemies have health, and they needed to be jumped on or hit twice to either die as a Goomba, or become a shell as a Koopa. The observer specifically was used to update the health bar to be shorter when the enemy takes damage and only gets notified upon those conditions and not constantly polled.  
+
+ 
+
+Do your patterns / technique implementations improve performance? Why or why not? 
+
+The pattern improved performance, but very slightly judging from the second screenshot. This is because that not much is happening over in the project. There are not a lot of objects that can cause a lot of lag from being loaded in, and having their logic executed.  
