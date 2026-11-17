@@ -15,7 +15,8 @@ public class Goomba : Enemy
             Debug.Log("supposed to die");
             Destroy(this.gameObject);
         }
-        
+        healthScript.Notify(healthScript);
+
     }
 
 }

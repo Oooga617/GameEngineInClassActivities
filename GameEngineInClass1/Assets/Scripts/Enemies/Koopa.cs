@@ -23,7 +23,8 @@ public class Koopa : Enemy
                 StartCoroutine(allowingBeKicked());
             }
         }
-        
+        healthScript.Notify(healthScript);
+
     }
 
     IEnumerator allowingBeKicked()

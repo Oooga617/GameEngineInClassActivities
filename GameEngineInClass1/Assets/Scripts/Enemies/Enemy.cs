@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
     public bool isHit = false;
     public int health = 1;
     [SerializeField] GameObject healthBar;
-    HealthBar healthScript;
+    protected HealthBar healthScript;
 
     void Awake()
     {
@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
         GameObject hpDisplay = Instantiate(healthBar, this.transform.position, Quaternion.identity, this.transform);
         //gets reference to HealthBar script
         healthScript = hpDisplay.GetComponent<HealthBar>();
-        
+        healthScript.Notify(healthScript);
     }
 
     
