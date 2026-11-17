@@ -10,7 +10,7 @@ Student #: 100982375
 Project Title: GameEngineInClass1. 
 
 Game loop: This is the very first in class activity being modified to where it is a loose recreation of Mario, but now the enemies have health bars. This was initially done with having the Enemy script instantiate the enemy with the health bar as a prefab when spawned in.  
-
+(THIS MODIFIES THE IN CLASS ACTIVITY PROJECT WITH THE MARIO THING I HAVE MADE WAY EARLIER, LOOK IN GameEngineInClass1 For what I have done). 
 (I HAVE USED AI TO TRY AND HELP FIGURE OUT HOW TO IMPLEMENT OBSERVER).  
 
 This will do a before implementing Observer patterns, and after implementations.  
